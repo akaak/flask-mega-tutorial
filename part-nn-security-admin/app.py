@@ -1,7 +1,6 @@
 # Demo of Flask-Security and Flask-Admin capabilities
 # @akaak
 
-
 from flask import Flask, render_template
 from flask.ext.sqlalchemy import SQLAlchemy
 from flask.ext.security import current_user, login_required, RoleMixin, Security, \
@@ -15,32 +14,7 @@ from flask.ext.admin.contrib import sqla
 
 
 app = Flask(__name__)
-
-app.config['DEBUG']=True
-app.config['SECRET_KEY'] = 'todo-app-secret-key'
-
-# for postgresql
-#app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:ID@localhost/flask_example'
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///appdata.db'
-
-# Config values for Flask-Security.
-# We're using PBKDF2 with salt.
-app.config['SECURITY_PASSWORD_HASH'] = 'pbkdf2_sha512'
-# Replace this with your own salt.
-app.config['SECURITY_PASSWORD_SALT'] = 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx'
-
-app.config['SECURITY_EMAIL_SENDER'] = 'no-reply@example.com'
-# SMTP Server settings (using https://github.com/ThiefMaster/maildump)
-app.config['MAIL_SERVER'] = 'localhost'
-app.config['MAIL_PORT'] = 1025
-app.config['MAIL_USE_SSL'] = False
-app.config['MAIL_USERNAME'] = ''
-app.config['MAIL_PASSWORD'] = ''
-
-# for app registration, confirmation by email
-app.config['SECURITY_REGISTERABLE'] = True 
-app.config['SECURITY_CONFIRMABLE'] = True 
-app.config['SECURITY_RECOVERABLE'] = True 
+app.config.from_object('config')
 
 
 # Flask-Mail and SQLAlchemy initialization
@@ -74,9 +48,8 @@ class User(db.Model, UserMixin):
     email = db.Column(db.String(255), unique=True)
     password = db.Column(db.String(255))
     active = db.Column(db.Boolean())
-    
     confirmed_at = db.Column(db.DateTime())
-    
+
     roles = db.relationship(
         'Role',
         secondary=roles_users,
@@ -91,7 +64,6 @@ security = Security(app, user_datastore)
 def before_first_request():
 
     db.create_all()
-
     user_datastore.find_or_create_role(name='admin', description='Administrator')
     user_datastore.find_or_create_role(name='end-user', description='End user')
 
@@ -118,22 +90,18 @@ def index():
 class UserAdmin(sqla.ModelView):
 
     column_exclude_list = ('password',)
-
     form_excluded_columns = ('password',)
-
     column_auto_select_related = True
 
     def is_accessible(self):
         return current_user.has_role('admin')
 
     def scaffold_form(self):
-
         form_class = super(UserAdmin, self).scaffold_form()
         form_class.password2 = PasswordField('New Password')
         return form_class
 
     def on_model_change(self, form, model, is_created):
-
         if len(model.password2):
             model.password = utils.encrypt_password(model.password2)
 
