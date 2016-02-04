@@ -2,5 +2,5 @@
 *.pyo
 app.db
 flask
-
+appdata.db
 
