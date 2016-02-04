@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Flask-Security and Flask-Admin example - Home page</title>
+</head>
+
+<style>
+body {
+    margin: 10;
+    font-family: Arial;
+	font-size: 12pt;
+	background-color: #EEF;
+}
+
+h1 {
+    margin: .67em 0;
+    font-size: 2em
+}
+
+h2 {
+    margin: .47em 0;
+    font-size: 1.6em
+}
+
+h3 {
+    margin: .37em 0;
+    font-size: 1.2em
+}
+a {
+    background-color: transparent
+}
+
+a:active, a:hover {
+    outline: 0
+}
+p {
+	font-family: Arial;
+	font-size: 10pt;
+}
+</style>
+
+<body>
+	<h2>Flask with Security & Admin</h2>
+
+    <h3>Welcome {{ current_user.email }}!</h3>
+    <br />
+    If you're seeing this page, you must be logged in!<br />
+    <br />
+    
+    <h3>Admin?</h3>
+    Click <a href="admin">here</a> if you are an administrator.<br />
+    <br />
+    
+
+    <br/>
+    <p><a href="/logout">Logout</a></p>
+    
+    <hr/>
+    <p>
+    Example demonstrating <a href="https://pythonhosted.org/Flask-Security/">Flask-Security</a> and <a href="https://flask-admin.readthedocs.org/en/latest/">Flask-Admin</a> capabilities. 
+    </p>
+</body>
+</html>
