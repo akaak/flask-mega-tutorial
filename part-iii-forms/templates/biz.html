@@ -1,0 +1,21 @@
+<!-- extend base layout -->
+{% extends "base.html" %}
+
+{% block content %}
+
+    <h1>Biz</h1>
+    <div class='edit well offset 2 span8'>
+    <form method='post' class="form-horizontal">
+        {{ form.hidden_tag() }}
+        <legend>Add task</legend>
+        {{ edit_field(form.name , class="span3") }}
+        {{ edit_field(form.description, rows="5" ,class="span3"
+                     , placeholder="foobar" ) }}
+        {{ edit_field(form.added_date, class="span3",type="datetime") }}
+        <div class="form-actions">
+            <button type="submit" class="btn">SAVE</button>
+        </div>
+    </form>
+</div>
+
+{% endblock %}

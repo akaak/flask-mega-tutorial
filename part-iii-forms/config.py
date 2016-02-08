@@ -1,3 +1,6 @@
-
 CSRF_ENABLED = True
-SECRET_KEY = 'flask-tutorial-secret-key-987987398w7e'
+DEBUG = True
+
+SECRET_KEY = '6e9d6e59ad52278806294952fbd3a263'
+
+SQLALCHEMY_DATABASE_URI = 'sqlite:///appdata.db'
