@@ -1,0 +1,15 @@
+<!-- extend base layout -->
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>Business List</h1>
+
+    <table>
+    {% for biz in bizs %}
+    <p>
+      <tr><td><b>{{ biz.name }}</b></td>
+		<td>{{ biz.description }}</td></tr>
+    </p>
+    {% endfor %}
+    </table>
+{% endblock %}

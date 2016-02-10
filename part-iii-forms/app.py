@@ -19,21 +19,8 @@ db = SQLAlchemy(app)
 @app.route('/')
 @app.route('/index')
 def index():
-    user = {'nickname': 'Miguel'}
-    posts = [
-        {
-            'author': {'nickname': 'John'},
-            'body': 'Beautiful day in Portland!'
-        },
-        {
-            'author': {'nickname': 'Susan'},
-            'body': 'The Avengers movie was so cool!'
-        }
-    ]
     return render_template('index.html',
-                           title='Home',
-                           user=user,
-                           posts=posts)
+                           title='Home')
 
 
 
@@ -49,13 +36,16 @@ def new_biz():
                     	form.added_date.data
                     )
 
-        print "NEW BIZ IS: ", new_biz.name, new_biz.description
-
         db.session.add(new_biz)
         db.session.commit()
-        return redirect(url_for('index'))
+        return redirect(url_for('biz_list'))
     return render_template('biz.html',form=form)
 
+@app.route('/bizlist',methods=['GET','POST'])
+def biz_list():
+	biz_list = Business.query.all()
+	#biz_list = {'name': '1.1', 'desc': '2.2'}
+	return render_template('biz_list.html', bizs=biz_list) 
 
 #@app.before_first_request
 def before_first_request():
