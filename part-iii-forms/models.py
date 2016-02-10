@@ -6,7 +6,7 @@ import datetime
 
 db = SQLAlchemy()
 
-class Bizs(db.Model):
+class Business(db.Model):
 
     #__tablename__ = "bizs"
 

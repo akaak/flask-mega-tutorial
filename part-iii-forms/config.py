@@ -3,4 +3,4 @@ DEBUG = True
 
 SECRET_KEY = '6e9d6e59ad52278806294952fbd3a263'
 
-SQLALCHEMY_DATABASE_URI = 'sqlite:///appdata.db'
+SQLALCHEMY_DATABASE_URI = 'sqlite:///bizdb.db'
