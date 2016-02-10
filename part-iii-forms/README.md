@@ -1,6 +1,7 @@
 
 ## Querying the Models
 
+```
 $ python
 >>
 
@@ -22,3 +23,5 @@ $ python
 
 >> db.session.add(b)
 >> db.session.commit()
+
+```
