@@ -6,12 +6,45 @@
     <title>microblog</title>
     {% endif %}
   </head>
+
+  <style>
+    body {
+        margin-top: 20
+        margin-bottom:20;
+        margin-left: 50;
+        margin-right:50;
+        font-family: Arial;
+        font-size: 12pt;
+        background-color: #EEE;
+    }
+    h1 {
+        margin: .67em 0;
+        font-size: 2em
+    }
+    h2 {
+        margin: .47em 0;
+        font-size: 1.6em
+    }
+    
+    a {
+        background-color: transparent
+    }
+    a:active, a:hover {
+        outline: 0
+    }
+    p {
+        font-family: Arial;
+        font-size: 10pt;
+    }
+  </style>
+
   <body>
     
     <!-- Menu -->
     <div><a href="/index">Home</a> 
     &nbsp; &nbsp;
-    <a href="/add">Add a Biz</a></div>
+    <a href="/add">Add a Biz</a>
+    &nbsp; &nbsp;
     <a href="/bizlist">Biz List</a></div>
     
     {% macro edit_field(field,catch_kwargs=true) %}

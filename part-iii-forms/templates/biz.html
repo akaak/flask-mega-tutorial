@@ -3,11 +3,11 @@
 
 {% block content %}
 
-    <h1>Biz</h1>
+    <h2>Add Business</h2>
     <div class='edit well offset 2 span8'>
     <form method='post' class="form-horizontal">
         {{ form.hidden_tag() }}
-        <legend>Add task</legend>
+        
         {{ edit_field(form.name , class="span3") }}
         {{ edit_field(form.description, rows="5" ,class="span3"
                      , placeholder="foobar" ) }}
