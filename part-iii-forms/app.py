@@ -8,20 +8,27 @@ from contextlib import closing
 from datetime import date
 
 import forms
-import models
-from models import Business, db
 
+# Create app and load the config
 app = Flask(__name__)
 app.config.from_object('config')
 
+# connect to the database
 db = SQLAlchemy(app)
+
+# the "models" import SHOULD be after the above "db" assignment 
+import models
+# 'from models import *' works but 'from models import Business' does NOT work
+# dont know why!
+from models import *
+
+# run db.create_all before running the app to create DB Tables
 
 @app.route('/')
 @app.route('/index')
 def index():
     return render_template('index.html',
                            title='Home')
-
 
 
 @app.route('/add/',methods=['GET','POST'])
@@ -46,15 +53,6 @@ def biz_list():
 	biz_list = Business.query.all()
 	#biz_list = {'name': '1.1', 'desc': '2.2'}
 	return render_template('biz_list.html', bizs=biz_list) 
-
-#@app.before_first_request
-def before_first_request():
-	db.create_all()
-	dt = date.today()
-	b = models.Bizs(name='testbiz', description='test biz description', added_date=dt)
-	
-	db.session.add(b)
-	db.session.commit()
 
 
 if __name__ == '__main__':

@@ -1,10 +1,10 @@
 # models.py
-
 from flask_sqlalchemy import SQLAlchemy
-#from app import db
+from app import db
 import datetime
 
-db = SQLAlchemy()
+# cannot have the following db assignment in the models.py
+#db = SQLAlchemy()
 
 class Business(db.Model):
 
