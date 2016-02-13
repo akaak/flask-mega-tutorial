@@ -1,13 +1,16 @@
+# Application file
+#
+# Simple application to add a business and list businesses
+
 from flask import Flask, url_for
 
 from flask import request, render_template, flash, redirect
-from forms import BizForm, AddBiz
 from flask.ext.sqlalchemy import SQLAlchemy
 from flask.ext.security import Security, utils
-from contextlib import closing
-from datetime import date
 
 import forms
+from forms import BizForm, AddBiz
+
 
 # Create app and load the config
 app = Flask(__name__)
@@ -16,11 +19,13 @@ app.config.from_object('config')
 # connect to the database
 db = SQLAlchemy(app)
 
-# the "models" import SHOULD be after the above "db" assignment 
+
+# the "models" import SHOULD be after the above "db" assignment
 import models
 # 'from models import *' works but 'from models import Business' does NOT work
 # dont know why!
 from models import *
+
 
 # run db.create_all before running the app to create DB Tables
 
@@ -34,11 +39,11 @@ def index():
 @app.route('/add/',methods=['GET','POST'])
 def new_biz():
     form = AddBiz(csrf_enabled=True)
-    #form_biz = Bizs()
+
     if form.validate_on_submit():
 
         new_biz = Business(
-                    	form.name.data,                     
+                    	form.name.data,
                     	form.description.data,
                     	form.added_date.data
                     )
@@ -50,9 +55,10 @@ def new_biz():
 
 @app.route('/bizlist',methods=['GET','POST'])
 def biz_list():
-	biz_list = Business.query.all()
-	#biz_list = {'name': '1.1', 'desc': '2.2'}
-	return render_template('biz_list.html', bizs=biz_list) 
+    """ Query Business object and list businesses
+    """
+    biz_list = Business.query.all()
+    return render_template('biz_list.html', bizs=biz_list)
 
 
 if __name__ == '__main__':

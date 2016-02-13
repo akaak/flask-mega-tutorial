@@ -5,6 +5,18 @@
 $ python
 >>
 
+### initiating the db and creating tables 
+
+From the Python interpreter, do the following 
+
+	>>> from app import db
+	>>> db
+	<SQLAlchemy engine='sqlite:///bizdb.db'>
+	>>> db.create_all()
+	>>> 
+
+Once the above steps are done, a non-zero size file `bizdb.db` gets created in the folder.
+
 >> from app import db
 >> db # shows sqlite
 >> import models
