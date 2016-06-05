@@ -24,12 +24,19 @@ The whole application is created as one _module_.
 
 - Create a virtual environment
 - Install the required packages via pip
+- `$ workon flaskenv` 
+	(contains all required modules)
 - run the app by running `python app.py`
   - point the browser to http://127.0.0.1:8080/
 
 
 ### Screenshot of the Index page (after logging in)
-
 ![Screenshot of the app; post-login](flask-security-admin-app-v1.png)
+
+### Screenshot of the Mail Catcher (mail app)
+
+<https://mailcatcher.me> is a nice Ruby app to read and send email on the localhost.
+
+![Screenshot of the mail](mailcatcher-screenshot-flaskapp.png)
 
 version 1
